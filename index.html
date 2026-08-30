@@ -1,0 +1,473 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>SeriesForge — Turn Long Videos Into Short-Form Series</title> <style> * { margin: 0; padding: 0; box-sizing: border-box; } :root { --bg: #08080c; --card: #111118; --text: #f5f5f7; --muted: #9b9ba8; --purple: #8b5cf6; --purple-light: #a78bfa; --border: rgba(255,255,255,0.09); } body { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; } a { color: inherit; text-decoration: none; } /* NAVBAR */ nav { width: 100%; max-width: 1150px; margin: auto; padding: 24px 24px; display: flex; align-items: center; justify-content: space-between; } .logo { font-size: 21px; font-weight: 800; letter-spacing: -0.5px; } .logo span { color: var(--purple-light); } .nav-links { display: flex; gap: 30px; color: var(--muted); font-size: 14px; } .nav-links a:hover { color: white; } .nav-button { background: white; color: #08080c; padding: 10px 18px; border-radius: 8px; font-size: 14px; font-weight: 700; } /* HERO */ .hero { max-width: 1050px; margin: auto; padding: 110px 24px 80px; text-align: center; position: relative; } .glow { position: absolute; width: 500px; height: 300px; background: #7c3aed; filter: blur(150px); opacity: 0.16; top: 30px; left: 50%; transform: translateX(-50%); pointer-events: none; } .badge { display: inline-block; border: 1px solid var(--border); background: rgba(255,255,255,0.03); color: var(--purple-light); padding: 7px 13px; border-radius: 100px; font-size: 13px; margin-bottom: 25px; } h1 { font-size: clamp(48px, 8vw, 82px); line-height: 0.98; letter-spacing: -4px; max-width: 900px; margin: auto; } h1 span { background: linear-gradient(135deg, #fff, #9b7cff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; } .hero p { max-width: 650px; margin: 28px auto 35px; color: var(--muted); font-size: 18px; } .buttons { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; } .primary { background: var(--purple); padding: 13px 22px; border-radius: 9px; font-weight: 700; box-shadow: 0 0 30px rgba(139,92,246,0.25); } .primary:hover { background: #7c3aed; } .secondary { border: 1px solid var(--border); padding: 13px 22px; border-radius: 9px; color: #ddd; } /* PRODUCT PREVIEW */ .preview { max-width: 950px; margin: 30px auto 100px; padding: 0 24px; } .dashboard { background: #101016; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 30px 100px rgba(0,0,0,0.5); } .dashboard-top { padding: 13px 18px; border-bottom: 1px solid var(--border); display: flex; gap: 7px; } .dot { width: 9px; height: 9px; background: #383842; border-radius: 50%; } .dashboard-content { display: grid; grid-template-columns: 1.4fr 1fr; gap: 15px; padding: 20px; } .video { height: 320px; border-radius: 10px; background: linear-gradient(135deg, rgba(139,92,246,.25), rgba(20,20,30,.5)), #181820; display: flex; align-items: center; justify-content: center; color: #aaa; position: relative; overflow: hidden; } .play { width: 55px; height: 55px; border-radius: 50%; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center; } .clips { display: flex; flex-direction: column; gap: 10px; } .clip { flex: 1; border-radius: 9px; background: #181820; border: 1px solid var(--border); padding: 15px; display: flex; justify-content: space-between; align-items: center; } .clip-info strong { display: block; font-size: 14px; } .clip-info small { color: var(--muted); } .status { color: #7dd3fc; font-size: 11px; } /* FEATURES */ .section { max-width: 1050px; margin: auto; padding: 70px 24px; } .section-header { max-width: 650px; margin-bottom: 45px; } .eyebrow { color: var(--purple-light); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; } h2 { font-size: 42px; letter-spacing: -2px; line-height: 1.1; } .section-header p { color: var(--muted); margin-top: 15px; } .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; } .feature { background: var(--card); border: 1px solid var(--border); border-radius: 13px; padding: 25px; } .icon { width: 40px; height: 40px; border-radius: 9px; background: rgba(139,92,246,.12); color: var(--purple-light); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 18px; } .feature h3 { font-size: 17px; margin-bottom: 8px; } .feature p { color: var(--muted); font-size: 14px; } /* CTA */ .cta { max-width: 900px; margin: 80px auto; padding: 80px 25px; text-align: center; border: 1px solid var(--border); border-radius: 20px; background: radial-gradient(circle at 50% 0%, rgba(139,92,246,.18), transparent 55%), #0d0d13; } .cta h2 { max-width: 650px; margin: auto; } .cta p { color: var(--muted); margin: 18px auto 30px; } /* FOOTER */ footer { border-top: 1px solid var(--border); padding: 30px 24px; color: var(--muted); font-size: 13px; text-align: center; } /* MOBILE */ @media (max-width: 700px) { .nav-links { display: none; } .hero { padding-top: 75px; } h1 { letter-spacing: -2px; } .dashboard-content { grid-template-columns: 1fr; } .video { height: 220px; } .features { grid-template-columns: 1fr; } h2 { font-size: 34px; } } </style> </head> <body> <nav> <a href="#" class="logo">Series<span>Forge</span></a>
+<div class="nav-links">
+  <a href="#features">Features</a>
+  <a href="#how">How it works</a>
+  <a href="#pricing">Pricing</a>
+</div>
+
+<a href="#" class="nav-button">Get Started</a>
+
+</nav> <main>
+<!-- HERO -->
+
+<section class="hero">
+  <div class="glow"></div>
+
+  <div class="badge">✦ Your long-form content, reimagined</div>
+
+  <h1>
+    Turn one long video into
+    <span>a whole series.</span>
+  </h1>
+
+  <p>
+    SeriesForge automatically finds the strongest sections of your
+    long-form videos and transforms them into polished,
+    ready-to-publish short-form content.
+  </p>
+
+  <div class="buttons">
+    <a href="#" class="primary">Start forging →</a>
+    <a href="#how" class="secondary">See how it works</a>
+  </div>
+</section>
+
+
+<!-- PRODUCT PREVIEW -->
+
+<section class="preview">
+  <div class="dashboard">
+
+    <div class="dashboard-top">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+
+    <div class="dashboard-content">
+
+      <div class="video">
+        <div class="play">▶</div>
+      </div>
+
+      <div class="clips">
+
+        <div class="clip">
+          <div class="clip-info">
+            <strong>Episode 01</strong>
+            <small>42 sec · Vertical</small>
+          </div>
+          <div class="status">Ready</div>
+        </div>
+
+        <div class="clip">
+          <div class="clip-info">
+            <strong>Episode 02</strong>
+            <small>38 sec · Vertical</small>
+          </div>
+          <div class="status">Ready</div>
+        </div>
+
+        <div class="clip">
+          <div class="clip-info">
+            <strong>Episode 03</strong>
+            <small>51 sec · Vertical</small>
+          </div>
+          <div class="status">Ready</div>
+        </div>
+
+        <div class="clip">
+          <div class="clip-info">
+            <strong>Episode 04</strong>
+            <small>44 sec · Vertical</small>
+          </div>
+          <div class="status">Ready</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FEATURES -->
+
+<section class="section" id="features">
+
+  <div class="section-header">
+    <div class="eyebrow">Everything automated</div>
+
+    <h2>
+      From recording to
+      ready-to-post.
+    </h2>
+
+    <p>
+      SeriesForge handles the repetitive work so you can focus
+      on creating great content.
+    </p>
+  </div>
+
+
+  <div class="features">
+
+    <div class="feature">
+      <div class="icon">✦</div>
+      <h3>Find the story</h3>
+      <p>
+        Automatically identify complete, compelling sections
+        from your long-form videos.
+      </p>
+    </div>
+
+    <div class="feature">
+      <div class="icon">▣</div>
+      <h3>Go vertical</h3>
+      <p>
+        Reframe your footage for TikTok, Reels, Shorts,
+        and other vertical platforms.
+      </p>
+    </div>
+
+    <div class="feature">
+      <div class="icon">Aa</div>
+      <h3>Perfect captions</h3>
+      <p>
+        Generate synchronized captions that make every
+        clip easy to follow.
+      </p>
+    </div>
+
+    <div class="feature">
+      <div class="icon">⌁</div>
+      <h3>Post metadata</h3>
+      <p>
+        Generate hooks, titles, descriptions, and other
+        metadata for every clip.
+      </p>
+    </div>
+
+    <div class="feature">
+      <div class="icon">✓</div>
+      <h3>Review everything</h3>
+      <p>
+        Review and approve clips before anything gets
+        published to your audience.
+      </p>
+    </div>
+
+    <div class="feature">
+      <div class="icon">↗</div>
+      <h3>Publish automatically</h3>
+      <p>
+        Connect your social accounts and schedule approved
+        content for publication.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- HOW IT WORKS -->
+
+<section class="section" id="how">
+
+  <div class="section-header">
+    <div class="eyebrow">How it works</div>
+
+    <h2>
+      One video in.
+      A content series out.
+    </h2>
+  </div>
+
+  <div class="features">
+
+    <div class="feature">
+      <div class="icon">01</div>
+      <h3>Upload</h3>
+      <p>
+        Give SeriesForge your podcast, interview,
+        livestream, or other long-form video.
+      </p>
+    </div>
+
+    <div class="feature">
+      <div class="icon">02</div>
+      <h3>Forge</h3>
+      <p>
+        SeriesForge finds complete sections and turns
+        them into sequential short-form clips.
+      </p>
+    </div>
+
+    <div class="feature">
+      <div class="icon">03</div>
+      <h3>Publish</h3>
+      <p>
+        Review your clips, schedule them, and publish
+        them to your connected social accounts.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- CTA -->
+
+<section class="cta">
+
+  <h2>
+    Your next content series is already
+    hiding inside your last video.
+  </h2>
+
+  <p>
+    Stop manually cutting clips. Start forging content.
+  </p>
+
+  <a href="#" class="primary">
+    Start forging →
+  </a>
+
+</section>
+
+</main> <footer> © 2026 SeriesForge. Built for creators. </footer> </body> </html>
+
+<div class="nav-links">
+  <a href="#features">Features</a>
+  <a href="#how">How it works</a>
+  <a href="#pricing">Pricing</a>
+</div>
+
+<a href="#" class="nav-button">Get Started</a>
+</nav> <main>
+  <!-- HERO -->
+
+<section class="hero">
+  <div class="glow"></div>
+
+  <div class="badge">✦ Your long-form content, reimagined</div>
+
+  <h1>
+    Turn one long video into
+    <span>a whole series.</span>
+  </h1>
+
+  <p>
+    SeriesForge automatically finds the strongest sections of your
+    long-form videos and transforms them into polished,
+    ready-to-publish short-form content.
+  </p>
+
+  <div class="buttons">
+    <a href="#" class="primary">Start forging →</a>
+    <a href="#how" class="secondary">See how it works</a>
+  </div>
+</section>
+
+
+<!-- PRODUCT PREVIEW -->
+
+<section class="preview">
+  <div class="dashboard">
+
+    <div class="dashboard-top">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+
+    <div class="dashboard-content">
+
+      <div class="video">
+        <div class="play">▶</div>
+      </div>
+
+      <div class="clips">
+
+        <div class="clip">
+          <div class="clip-info">
+            <strong>Episode 01</strong>
+            <small>42 sec · Vertical</small>
+          </div>
+          <div class="status">Ready</div>
+        </div>
+
+        <div class="clip">
+          <div class="clip-info">
+            <strong>Episode 02</strong>
+            <small>38 sec · Vertical</small>
+          </div>
+          <div class="status">Ready</div>
+        </div>
+
+        <div class="clip">
+          <div class="clip-info">
+            <strong>Episode 03</strong>
+            <small>51 sec · Vertical</small>
+          </div>
+          <div class="status">Ready</div>
+        </div>
+
+        <div class="clip">
+          <div class="clip-info">
+            <strong>Episode 04</strong>
+            <small>44 sec · Vertical</small>
+          </div>
+          <div class="status">Ready</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FEATURES -->
+
+<section class="section" id="features">
+
+  <div class="section-header">
+    <div class="eyebrow">Everything automated</div>
+
+    <h2>
+      From recording to
+      ready-to-post.
+    </h2>
+
+    <p>
+      SeriesForge handles the repetitive work so you can focus
+      on creating great content.
+    </p>
+  </div>
+
+
+  <div class="features">
+
+    <div class="feature">
+      <div class="icon">✦</div>
+      <h3>Find the story</h3>
+      <p>
+        Automatically identify complete, compelling sections
+        from your long-form videos.
+      </p>
+    </div>
+
+    <div class="feature">
+      <div class="icon">▣</div>
+      <h3>Go vertical</h3>
+      <p>
+        Reframe your footage for TikTok, Reels, Shorts,
+        and other vertical platforms.
+      </p>
+    </div>
+
+    <div class="feature">
+      <div class="icon">Aa</div>
+      <h3>Perfect captions</h3>
+      <p>
+        Generate synchronized captions that make every
+        clip easy to follow.
+      </p>
+    </div>
+
+    <div class="feature">
+      <div class="icon">⌁</div>
+      <h3>Post metadata</h3>
+      <p>
+        Generate hooks, titles, descriptions, and other
+        metadata for every clip.
+      </p>
+    </div>
+
+    <div class="feature">
+      <div class="icon">✓</div>
+      <h3>Review everything</h3>
+      <p>
+        Review and approve clips before anything gets
+        published to your audience.
+      </p>
+    </div>
+
+    <div class="feature">
+      <div class="icon">↗</div>
+      <h3>Publish automatically</h3>
+      <p>
+        Connect your social accounts and schedule approved
+        content for publication.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- HOW IT WORKS -->
+
+<section class="section" id="how">
+
+  <div class="section-header">
+    <div class="eyebrow">How it works</div>
+
+    <h2>
+      One video in.
+      A content series out.
+    </h2>
+  </div>
+
+  <div class="features">
+
+    <div class="feature">
+      <div class="icon">01</div>
+      <h3>Upload</h3>
+      <p>
+        Give SeriesForge your podcast, interview,
+        livestream, or other long-form video.
+      </p>
+    </div>
+
+    <div class="feature">
+      <div class="icon">02</div>
+      <h3>Forge</h3>
+      <p>
+        SeriesForge finds complete sections and turns
+        them into sequential short-form clips.
+      </p>
+    </div>
+
+    <div class="feature">
+      <div class="icon">03</div>
+      <h3>Publish</h3>
+      <p>
+        Review your clips, schedule them, and publish
+        them to your connected social accounts.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- CTA -->
+
+<section class="cta">
+
+  <h2>
+    Your next content series is already
+    hiding inside your last video.
+  </h2>
+
+  <p>
+    Stop manually cutting clips. Start forging content.
+  </p>
+
+  <a href="#" class="primary">
+    Start forging →
+  </a>
+
+</section>
+
+</main> <footer> © 2026 SeriesForge. Built for creators. </footer> </body> </html>
