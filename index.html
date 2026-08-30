@@ -465,6 +465,21 @@
       text-align: center;
     }
 
+    .footer-links {
+      display: inline-flex;
+      gap: 18px;
+      margin-left: 14px;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
     /* MOBILE */
 
     @media (max-width: 700px) {
@@ -899,6 +914,10 @@
 
   <footer>
     © 2026 SeriesForge. Built for creators.
+    <span class="footer-links">
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+    </span>
   </footer>
 
 </body>
