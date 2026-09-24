@@ -161,7 +161,7 @@
         <div class="card-head">
           <div>
             <h2>4. Review and publish</h2>
-            <p>Nothing is sent to TikTok until you press the publish button.</p>
+            <p>Nothing is sent to TikTok until you choose a publishing action.</p>
           </div>
         </div>
 
@@ -184,13 +184,17 @@
 
           <div class="actions">
             <button id="publishBtn" class="button primary" type="button" disabled>Post to TikTok</button>
+            <button id="draftBtn" class="button secondary" type="button" disabled>Send to TikTok drafts</button>
+          </div>
+
+          <div class="field-help" style="margin-top:10px">
+            Draft upload sends the selected video to your TikTok inbox. Caption, privacy, and final editing are completed inside TikTok.
           </div>
 
           <div id="status" class="status" role="status" aria-live="polite"></div>
 
           <div class="publish-note">
-            TikTok may take a few minutes to process a post after the upload completes.
-            During unaudited testing, Direct Post content is restricted to private viewing.
+            TikTok may take a few minutes to process an upload. During unaudited testing, Direct Post content is restricted to private viewing. Draft uploads are delivered to the creator's TikTok inbox for further editing.
           </div>
         </div>
       </aside>
