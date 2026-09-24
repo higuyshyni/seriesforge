@@ -16,7 +16,8 @@ const state = {
   brandOrganic: false,
   brandContent: false,
   aigc: false,
-  posting: false
+  posting: false,
+  drafting: false
 };
 
 const privacyLabels = {
@@ -245,17 +246,27 @@ function updatePublishState() {
     state.privacy &&
     $('consent').checked &&
     disclosureValid &&
-    !state.posting
+    !state.posting &&
+    !state.drafting
   );
 
   $('publishBtn').disabled = !ready;
+
+  const draftReady = Boolean(
+    state.creator &&
+    state.file &&
+    !state.posting &&
+    !state.drafting
+  );
+
+  $('draftBtn').disabled = !draftReady;
 }
 
 function boolForm(value) {
   return value ? 'true' : 'false';
 }
 
-async function pollPublishStatus(publishId) {
+async function pollPublishStatus(publishId, mode = 'direct') {
   for (let attempt = 0; attempt < 75; attempt += 1) {
     await new Promise(resolve => setTimeout(resolve, 4000));
 
@@ -269,8 +280,21 @@ async function pollPublishStatus(publishId) {
     const current = data.status || 'PROCESSING';
     status(`TikTok processing status: ${current}`);
 
+    if (mode === 'draft' && current === 'SEND_TO_USER_INBOX') {
+      status(
+        'Draft delivered successfully. Open TikTok and check your inbox to continue editing and post it.',
+        'success'
+      );
+      return;
+    }
+
     if (current === 'PUBLISH_COMPLETE') {
-      status('Published successfully. TikTok has completed processing the post.', 'success');
+      status(
+        mode === 'draft'
+          ? 'TikTok reports that the uploaded draft has been completed in the TikTok editing flow.'
+          : 'Published successfully. TikTok has completed processing the post.',
+        'success'
+      );
       return;
     }
 
@@ -279,7 +303,12 @@ async function pollPublishStatus(publishId) {
     }
   }
 
-  status('Upload finished and TikTok is still processing. It may take a few more minutes.', 'warning');
+  status(
+    mode === 'draft'
+      ? 'Upload finished and TikTok is still preparing the draft. Check your TikTok inbox shortly.'
+      : 'Upload finished and TikTok is still processing. It may take a few more minutes.',
+    'warning'
+  );
 }
 
 $('connectBtn').addEventListener('click', () => {
@@ -391,12 +420,49 @@ $('publishBtn').addEventListener('click', async () => {
     }
 
     status(`Upload accepted. TikTok is processing publish ID ${data.publish_id}.`);
-    await pollPublishStatus(data.publish_id);
+    await pollPublishStatus(data.publish_id, 'direct');
   } catch (error) {
     status(error.message || 'TikTok upload failed.', 'warning');
   } finally {
     state.posting = false;
     $('publishBtn').textContent = 'Post to TikTok';
+    updatePublishState();
+  }
+});
+
+$('draftBtn').addEventListener('click', async () => {
+  if (!state.creator || !state.file) {
+    updatePublishState();
+    return;
+  }
+
+  state.drafting = true;
+  updatePublishState();
+  $('draftBtn').textContent = 'Uploading draft...';
+  status('Uploading the selected video to TikTok drafts...');
+
+  const form = new FormData();
+  form.append('video', state.file, state.file.name);
+
+  try {
+    const response = await bridgeFetch('/api/draft', {
+      method: 'POST',
+      body: form
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || 'TikTok draft upload failed.');
+    }
+
+    status(`Draft upload accepted. TikTok is processing ID ${data.publish_id}.`);
+    await pollPublishStatus(data.publish_id, 'draft');
+  } catch (error) {
+    status(error.message || 'TikTok draft upload failed.', 'warning');
+  } finally {
+    state.drafting = false;
+    $('draftBtn').textContent = 'Send to TikTok drafts';
     updatePublishState();
   }
 });
