@@ -772,3 +772,26 @@ body::after {
   .art-grid { grid-template-columns: 1fr; }
   .art:nth-child(3) { grid-column: auto; width: 100%; }
 }
+
+
+/* Expand the flashlight to cover roughly half the viewport. */
+body::after {
+  background: radial-gradient(circle 50vw at var(--flash-x) var(--flash-y),
+    transparent 0,
+    transparent 25vw,
+    rgba(0,0,0,.08) 33vw,
+    rgba(0,0,0,.42) 41vw,
+    rgba(0,0,0,.82) 47vw,
+    #000 50vw);
+}
+@media (max-width: 760px) {
+  body::after {
+    background: radial-gradient(circle 50vw at var(--flash-x) var(--flash-y),
+      transparent 0,
+      transparent 25vw,
+      rgba(0,0,0,.08) 33vw,
+      rgba(0,0,0,.42) 41vw,
+      rgba(0,0,0,.82) 47vw,
+      #000 50vw);
+  }
+}
