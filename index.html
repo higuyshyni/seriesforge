@@ -3,288 +3,231 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#080b14">
-  <meta name="description" content="Ddojcord is an independent desktop client concept exploring a more personal, modular and immersive chat experience.">
-  <meta property="og:title" content="Ddojcord — Your space, refracted.">
-  <meta property="og:description" content="A chat space that feels like yours. Explore the Ddojcord concept.">
+  <meta name="theme-color" content="#030303">
+  <meta name="description" content="Ddojcord is an independent desktop client concept exploring a quieter, more personal way to connect.">
+  <meta property="og:title" content="Ddojcord — A quieter place to connect.">
+  <meta property="og:description" content="A personal space, after dark. Explore the Ddojcord concept.">
   <meta property="og:type" content="website">
   <link rel="canonical" href="https://seriesforge.online/">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="stylesheet" href="/assets/ddojcord.css">
-  <title>Ddojcord — Your space, refracted.</title>
+  <title>Ddojcord — A quieter place to connect.</title>
 </head>
-<body>
-  <div class="ambient ambient-a"></div>
-  <div class="ambient ambient-b"></div>
-  <div class="site-noise"></div>
+<body class="lights-on">
+  <div class="room-glow" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="dust-layer" aria-hidden="true">
+    <i style="--x:8%;--y:24%;--delay:-2s"></i>
+    <i style="--x:19%;--y:71%;--delay:-8s"></i>
+    <i style="--x:35%;--y:39%;--delay:-5s"></i>
+    <i style="--x:63%;--y:18%;--delay:-11s"></i>
+    <i style="--x:79%;--y:58%;--delay:-4s"></i>
+    <i style="--x:91%;--y:32%;--delay:-9s"></i>
+  </div>
 
   <header class="site-header">
     <a class="brand" href="#top" aria-label="Ddojcord home">
-      <span class="brand-mark" aria-hidden="true">
-        <svg viewBox="0 0 32 32" fill="none">
-          <path d="M8 5.5h10.2c5.2 0 8.3 3.4 8.3 8.4v4.2c0 5-3.1 8.4-8.3 8.4H8V5.5Z" stroke="url(#markStroke)" stroke-width="2.1"/>
-          <path d="M12 10.1h5.8c3 0 4.7 1.8 4.7 4.7v2.4c0 2.9-1.7 4.7-4.7 4.7H12V10.1Z" fill="url(#markFill)" fill-opacity=".85"/>
-          <defs>
-            <linearGradient id="markStroke" x1="7" y1="5" x2="27" y2="27"><stop stop-color="#A9F0FF"/><stop offset="1" stop-color="#B8A5FF"/></linearGradient>
-            <linearGradient id="markFill" x1="12" y1="10" x2="23" y2="22"><stop stop-color="#A9F0FF"/><stop offset="1" stop-color="#B8A5FF"/></linearGradient>
-          </defs>
-        </svg>
-      </span>
-      <span class="brand-word">ddoj<span>cord</span></span>
+      <span class="brand-mark" aria-hidden="true">d.</span>
+      <span>ddojcord</span>
     </a>
-
     <nav class="nav-links" aria-label="Main navigation">
-      <a href="#experience">Experience</a>
-      <a href="#features">Capabilities</a>
+      <a href="#experience">Atmosphere</a>
+      <a href="#features">Principles</a>
       <a href="#roadmap">Roadmap</a>
-      <a href="#faq">FAQ</a>
+      <a href="#faq">Details</a>
     </nav>
-
-    <a class="nav-cta" href="#roadmap">In development <span>↗</span></a>
-    <button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
-      <span></span><span></span>
-    </button>
+    <div class="header-actions">
+      <button class="light-switch" type="button" data-light-switch aria-pressed="true">
+        <span class="switch-dot" aria-hidden="true"></span>
+        <span data-light-label>LIGHTS ON</span>
+      </button>
+      <button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </div>
   </header>
 
   <main id="top">
     <section class="hero wrap">
       <div class="hero-copy">
-        <div class="eyebrow"><span class="eyebrow-dot"></span> An independent desktop client concept</div>
-        <h1>A chat space<br><span class="gradient-text">that feels like yours.</span></h1>
-        <p>Ddojcord explores a more personal way to connect: a modular desktop experience shaped around expressive themes, thoughtful controls, and room for your own workflow.</p>
+        <div class="eyebrow"><span></span> INDEPENDENT DESKTOP CONCEPT / 001</div>
+        <h1>A quieter<br>place to <em>connect.</em></h1>
+        <p>A personal space shaped around focus, atmosphere and control. Less noise in the room. More room for what matters.</p>
         <div class="hero-actions">
-          <a class="button-primary" href="#experience">Explore the experience
-            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h11M10 5l5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-          <a class="button-quiet" href="#roadmap">See what's taking shape</a>
+          <a class="button-primary" href="#experience">Enter the space <span aria-hidden="true">↘</span></a>
+          <a class="button-quiet" href="#roadmap">View the direction</a>
         </div>
         <div class="hero-meta">
-          <span><i></i> DESIGNED FOR PERSONALIZATION</span>
-          <span><i></i> EARLY CONCEPT</span>
+          <span>MONOCHROME BY DESIGN</span>
+          <span>EARLY CONCEPT</span>
         </div>
       </div>
 
-      <div class="hero-stage" data-tilt aria-label="Abstract glass interface preview">
-        <div class="stage-glow"></div>
-        <div class="orbit"><span class="orbit-point"></span></div>
-        <div class="hero-object">
-          <div class="hero-glass">
-            <div class="preview-top"><span>DDOJC / SPATIAL PREVIEW</span><span class="preview-status">CONCEPT STUDY</span></div>
-            <div class="preview-content">
-              <div class="preview-rail">
-                <span class="rail-glyph active">◈</span>
-                <span class="rail-glyph">⌘</span>
-                <span class="rail-glyph">◇</span>
-                <span class="rail-glyph">⌁</span>
-                <span class="rail-glyph">＋</span>
+      <div class="room-stage" data-tilt aria-label="Abstract three-dimensional Ddojcord interface study">
+        <div class="room-back-wall"></div>
+        <div class="room-ceiling">
+          <div class="light-fixture"><i></i></div>
+        </div>
+        <div class="light-beam"></div>
+        <div class="room-floor"></div>
+        <div class="stage-shadow"></div>
+        <div class="interface-shell">
+          <div class="interface-reflection"></div>
+          <div class="interface-top">
+            <span>DDOJC / ROOM 01</span>
+            <span class="interface-state"><i></i> CONCEPT STUDY</span>
+          </div>
+          <div class="interface-layout">
+            <aside class="interface-rail" aria-hidden="true">
+              <span class="rail-icon selected">d.</span>
+              <span class="rail-icon">⌁</span>
+              <span class="rail-icon">◌</span>
+              <span class="rail-icon">＋</span>
+              <span class="rail-bottom">•••</span>
+            </aside>
+            <div class="interface-main">
+              <div class="interface-heading">
+                <div><small>YOUR SPACE</small><h2>after hours</h2></div>
+                <span class="quiet-tag">QUIET MODE</span>
               </div>
-              <div class="preview-main">
-                <div class="preview-heading">
-                  <div><small>YOUR WORKSPACE</small><h3>Quiet hours</h3></div>
-                  <span class="preview-pill">FOCUS MODE</span>
-                </div>
-                <div class="preview-note">
-                  <span class="preview-avatar">N</span>
-                  <div><strong>Nova Studio</strong><p>A little more space. A little less noise.</p></div>
-                </div>
-                <div class="preview-line"><span></span> Your environment is tuned and ready.</div>
-                <div class="preview-bars"><i></i><i></i><i></i></div>
-                <div class="preview-bottom"><span>ATMOSPHERE / 04</span><span>DESIGN STATE</span></div>
+              <div class="channel-line"><span>#</span> the lounge <i>03 HERE</i></div>
+              <div class="preview-message">
+                <span class="avatar">a</span>
+                <div><strong>aria <time>11:42 PM</time></strong><p>somewhere between quiet and connected.</p></div>
               </div>
+              <div class="preview-message second">
+                <span class="avatar muted">m</span>
+                <div><strong>milo <time>11:44 PM</time></strong><p>that's where this should live.</p></div>
+              </div>
+              <div class="preview-composer"><span>Leave a thought...</span><b>↗</b></div>
             </div>
           </div>
+          <div class="interface-bottom"><span>PERSONAL SPACE</span><span>01 — 03</span></div>
         </div>
-        <div class="float-card float-one"><span class="float-icon">✧</span><span>Glass surfaces<small>DEPTH, NOT DISTRACTION</small></span></div>
-        <div class="float-card float-two"><span class="float-icon">⌘</span><span>Personal controls<small>YOUR FLOW, YOUR RULES</small></span></div>
-        <div class="float-card float-three"><span class="float-icon">◌</span><span>Modular by design</span></div>
+        <div class="stage-caption"><span>FIG. 01</span><span>FORM / LIGHT / SPACE</span></div>
+        <div class="stage-coordinate">53° 00' N&nbsp;&nbsp; 06° 15' W</div>
       </div>
-      <div class="scroll-mark">Scroll to explore</div>
+      <div class="scroll-cue"><span>SCROLL TO EXPLORE</span><i></i></div>
     </section>
 
-    <div class="signal-strip" aria-hidden="true">
-      <div class="signal-track">
-        <span><b></b> PERSONAL BY DESIGN</span><span><b></b> MODULAR THINKING</span><span><b></b> DEPTH WITH PURPOSE</span><span><b></b> YOUR SPACE, REIMAGINED</span>
-      </div>
-    </div>
-
     <section class="section wrap" id="experience">
-      <div class="section-head reveal">
-        <span class="section-kicker">01 — The experience</span>
-        <h2>Depth you can feel.<br><em>Clarity you can keep.</em></h2>
-        <p>A visual direction for a desktop space that feels tactile without getting in the way. Try the atmosphere controls below to change the preview.</p>
+      <div class="section-intro reveal">
+        <span class="section-kicker">01 / ATMOSPHERE</span>
+        <h2>Low light.<br><em>Clear intent.</em></h2>
+        <p>A restrained visual language built from contrast, depth and the occasional flicker. The room stays dark; the details find their own light.</p>
       </div>
-
-      <div class="experience-layout">
-        <div class="demo-window reveal" id="demo-window" data-skin="ice" data-blur="on" data-depth="on" data-compact="off">
-          <div class="demo-topbar"><span>DDOJC / INTERFACE STUDY</span><span class="demo-dots"><i></i><i></i><i></i></span></div>
-          <div class="demo-app">
-            <div class="demo-spaces">
-              <span class="demo-space selected">✧</span><span class="demo-space">◈</span><span class="demo-space">⌘</span><span class="demo-space">＋</span>
-            </div>
-            <div class="demo-room-list">
-              <small>COLLECTION</small>
-              <div class="demo-room active"><span>◌</span> lounge</div>
-              <div class="demo-room"><span>⌁</span> ideas</div>
-              <div class="demo-room"><span>◇</span> projects</div>
-              <div class="demo-room"><span>↗</span> links</div>
-              <small style="margin-top:22px">DIRECT</small>
-              <div class="demo-room"><span>·</span> aria</div>
-              <div class="demo-room"><span>·</span> milo</div>
-            </div>
-            <div class="demo-feed">
-              <div class="demo-feed-head"><strong># lounge</strong><span>04 MEMBERS</span></div>
-              <div class="demo-message">
-                <span class="demo-face">A</span>
-                <div><strong>aria</strong><time>10:42</time><p>the new atmosphere is looking clean. that soft glass is everything.</p></div>
-              </div>
-              <div class="demo-message">
-                <span class="demo-face alt">M</span>
-                <div><strong>milo</strong><time>10:44</time><p>Keeping the useful parts close and the noise out. That's the idea.</p></div>
-              </div>
-              <div class="demo-message">
-                <span class="demo-face">A</span>
-                <div><strong>aria</strong><time>10:45</time><p>Exactly. Let the workspace adapt to the person using it.</p></div>
-              </div>
-              <div class="demo-composer">Write something thoughtful…</div>
-            </div>
+      <div class="atmosphere-panel reveal">
+        <div class="panel-light" aria-hidden="true"><i></i><b></b></div>
+        <div class="panel-content">
+          <span class="mini-label">A SPACE THAT SETS THE TONE</span>
+          <h3>Keep what matters<br>in the light.</h3>
+          <p>The interface concept pairs quiet surfaces with deliberate highlights, creating a little distance from the noise without hiding the essentials.</p>
+          <div class="panel-bottom">
+            <button class="light-switch panel-switch" type="button" data-light-switch aria-pressed="true">
+              <span class="switch-dot" aria-hidden="true"></span>
+              <span data-light-label>LIGHTS ON</span>
+            </button>
+            <span class="panel-note">AMBIENT LIGHT / INTERACTIVE</span>
           </div>
-          <span class="demo-caption">VISUAL STUDY · NOT A CONNECTED CLIENT</span>
         </div>
-
-        <aside class="demo-controls reveal delay-1">
-          <span class="mini-label">LIVE APPEARANCE STUDY</span>
-          <h3>Shape the atmosphere.</h3>
-          <p>Switch the palette and surface treatments. This is an interactive design preview, not a working chat client.</p>
-          <div class="swatch-row" aria-label="Choose a preview palette">
-            <button class="swatch-ice" type="button" data-skin-choice="ice" aria-label="Ice palette" aria-pressed="true"></button>
-            <button class="swatch-violet" type="button" data-skin-choice="violet" aria-label="Violet palette" aria-pressed="false"></button>
-            <button class="swatch-mint" type="button" data-skin-choice="mint" aria-label="Mint palette" aria-pressed="false"></button>
-          </div>
-          <div class="setting-list">
-            <div class="setting-row"><span>Glass blur<small>Soft layered surfaces</small></span><button class="toggle" type="button" data-toggle="blur" aria-label="Toggle glass blur" aria-pressed="true"></button></div>
-            <div class="setting-row"><span>Depth effects<small>Light and elevation</small></span><button class="toggle" type="button" data-toggle="depth" aria-label="Toggle depth effects" aria-pressed="true"></button></div>
-            <div class="setting-row"><span>Compact spacing<small>More room in view</small></span><button class="toggle" type="button" data-toggle="compact" aria-label="Toggle compact spacing" aria-pressed="false"></button></div>
-          </div>
-        </aside>
+        <div class="panel-index">D — 001</div>
       </div>
     </section>
 
     <section class="section wrap" id="features">
-      <div class="section-head reveal">
-        <span class="section-kicker">02 — Design principles</span>
-        <h2>More than a new coat<br><em>of paint.</em></h2>
-        <p>The Ddojcord direction is built around meaningful customization: tools that fit your habits, an interface with atmosphere, and controls that stay understandable.</p>
+      <div class="section-intro reveal">
+        <span class="section-kicker">02 / PRINCIPLES</span>
+        <h2>Nothing loud.<br><em>Nothing accidental.</em></h2>
+        <p>Every part of the direction has a purpose: a calmer visual field, useful personal controls and space to make the experience your own.</p>
       </div>
-
-      <div class="feature-grid">
-        <article class="feature-card reveal">
-          <span class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7.5 12 3l8 4.5v9L12 21l-8-4.5v-9Z" stroke="currentColor" stroke-width="1.5"/><path d="m4.5 7.8 7.5 4.4 7.5-4.4M12 12.2V21" stroke="currentColor" stroke-width="1.5"/></svg></span>
-          <h3>A surface with depth.</h3>
-          <p>Translucency, soft reflections, layered lighting, and dimensional details — used with restraint so the interface stays readable.</p>
-          <div class="feature-art"><i class="glass-stack"></i><i class="glass-stack"></i><i class="glass-stack"></i></div>
+      <div class="principle-list">
+        <article class="principle reveal">
+          <span class="principle-number">01</span>
+          <div><h3>Atmosphere</h3><p>Monochrome surfaces, soft reflections and dimensional lighting that stay out of the way of the conversation.</p></div>
+          <span class="principle-mark">↗</span>
         </article>
-        <article class="feature-card reveal delay-1">
-          <span class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3v5m0 8v5M3 12h5m8 0h5M5.6 5.6l3.5 3.5m5.8 5.8 3.5 3.5m0-12.8-3.5 3.5m-5.8 5.8-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="12" r="3.2" stroke="currentColor" stroke-width="1.5"/></svg></span>
-          <h3>Your tools, your way.</h3>
-          <p>A modular approach to extensions and small utilities, with a focus on clear controls and purposeful additions.</p>
-          <div class="node-art"><i></i><i></i><i></i></div>
+        <article class="principle reveal">
+          <span class="principle-number">02</span>
+          <div><h3>Personal control</h3><p>Appearance, layout and small quality-of-life ideas shaped around the way each person works.</p></div>
+          <span class="principle-mark">↗</span>
         </article>
-        <article class="feature-card reveal">
-          <span class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5.5h16v13H4z" stroke="currentColor" stroke-width="1.5"/><path d="M8 9h8M8 12h5M8 15h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-          <h3>Clarity over clutter.</h3>
-          <p>Thoughtful spacing, useful hierarchy, and adjustable density make room for what matters in the moment.</p>
-          <div class="orbit-art"><i></i></div>
-        </article>
-        <article class="feature-card reveal delay-1">
-          <span class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5 9.2 17 19 7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 3.5a8.5 8.5 0 1 0 8.5 8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-          <h3>Control that stays close.</h3>
-          <p>Keyboard-first ideas, focused modes, and settings that are easy to understand — designed to keep the experience in your hands.</p>
-          <div class="feature-art"><i class="glass-stack"></i><i class="glass-stack"></i><i class="glass-stack"></i></div>
+        <article class="principle reveal">
+          <span class="principle-number">03</span>
+          <div><h3>Modular thinking</h3><p>An extension-minded approach that favours useful additions, understandable settings and a focused core.</p></div>
+          <span class="principle-mark">↗</span>
         </article>
       </div>
     </section>
 
-    <section class="manifesto">
-      <div class="manifesto-inner wrap reveal">
-        <h2>Less interface telling you how to work.<br><span>More room to make it your own.</span></h2>
-        <p class="manifesto-note">A considered workspace should feel personal, not complicated. That's the standard we're exploring.</p>
+    <section class="interlude">
+      <div class="interlude-inner wrap reveal">
+        <span class="section-kicker">A NOTE ON THE FEELING</span>
+        <p>Let the room fall away.<br><em>Keep the connection.</em></p>
+        <span class="interlude-index">DDOJC / 2026</span>
       </div>
     </section>
 
     <section class="section wrap" id="roadmap">
-      <div class="section-head reveal">
-        <span class="section-kicker">03 — What's taking shape</span>
-        <h2>Built in layers.<br><em>Not all at once.</em></h2>
-        <p>Ddojcord is an early concept. These are the areas being explored; they are not promises of released or currently working features.</p>
+      <div class="section-intro reveal">
+        <span class="section-kicker">03 / IN PROGRESS</span>
+        <h2>One layer<br><em>at a time.</em></h2>
+        <p>Ddojcord is an early concept. These are the areas being explored, not released or currently working features.</p>
       </div>
-      <div class="roadmap-grid">
-        <article class="roadmap-card reveal">
-          <span class="roadmap-number">LAYER 01 / FOUNDATION</span>
-          <span class="roadmap-status">Designing</span>
-          <h3>The core experience</h3>
-          <p>Establishing the desktop foundation, navigation model, and a coherent visual language.</p>
+      <div class="roadmap-list">
+        <article class="roadmap-row reveal">
+          <span class="roadmap-index">01</span>
+          <div><span class="roadmap-status">DESIGNING</span><h3>The foundation</h3><p>Desktop structure, navigation and the core interaction model.</p></div>
         </article>
-        <article class="roadmap-card reveal delay-1">
-          <span class="roadmap-number">LAYER 02 / PERSONALIZATION</span>
-          <span class="roadmap-status">Exploring</span>
-          <h3>Appearance and control</h3>
-          <p>Exploring themes, layout options, interaction details, and accessible motion controls.</p>
+        <article class="roadmap-row reveal">
+          <span class="roadmap-index">02</span>
+          <div><span class="roadmap-status">EXPLORING</span><h3>Personalisation</h3><p>Appearance, layout options, motion preferences and accessibility.</p></div>
         </article>
-        <article class="roadmap-card reveal delay-2">
-          <span class="roadmap-number">LAYER 03 / EXTENSIBILITY</span>
-          <span class="roadmap-status">Planned</span>
-          <h3>A modular ecosystem</h3>
-          <p>Considering a focused extension model for adding useful capabilities without unnecessary clutter.</p>
+        <article class="roadmap-row reveal">
+          <span class="roadmap-index">03</span>
+          <div><span class="roadmap-status">PLANNED</span><h3>Extensibility</h3><p>A focused approach to optional tools and modular capabilities.</p></div>
         </article>
       </div>
     </section>
 
-    <section class="section wrap" id="faq">
-      <div class="faq-grid">
-        <div class="faq-intro reveal">
-          <span class="section-kicker">04 — A few details</span>
-          <h2>Before you<br><em>dive in.</em></h2>
-          <p>A quick note on what this page represents and what it doesn't.</p>
-        </div>
-        <div class="faq-list reveal delay-1">
-          <article class="faq-item">
-            <h3>Can I download Ddojcord today?</h3>
-            <p>No. This is an early product concept and design preview. There is no public installer or released client available from this website yet.</p>
-          </article>
-          <article class="faq-item">
-            <h3>Is the interface preview connected to a chat account?</h3>
-            <p>No. The preview is a self-contained visual demo. It does not connect to Discord, access accounts, or send messages.</p>
-          </article>
-          <article class="faq-item">
-            <h3>Is Ddojcord an official Discord product?</h3>
-            <p>No. Ddojcord is an independent concept and is not affiliated with, endorsed by, or sponsored by Discord Inc.</p>
-          </article>
-          <article class="faq-item">
-            <h3>When will it be available?</h3>
-            <p>There is no release date to announce yet. The roadmap will be updated as the project moves from concept into development.</p>
-          </article>
-        </div>
+    <section class="section wrap faq-section" id="faq">
+      <div class="section-intro reveal">
+        <span class="section-kicker">04 / DETAILS</span>
+        <h2>Before you<br><em>step inside.</em></h2>
+      </div>
+      <div class="faq-list reveal">
+        <article class="faq-item">
+          <h3>Can I download Ddojcord?</h3>
+          <p>Not yet. This website presents an early concept and visual direction. There is no public installer or released client available.</p>
+        </article>
+        <article class="faq-item">
+          <h3>Does this preview connect to Discord?</h3>
+          <p>No. The interface shown here is a self-contained design study. It does not access accounts, connect to Discord or send messages.</p>
+        </article>
+        <article class="faq-item">
+          <h3>Is Ddojcord an official Discord product?</h3>
+          <p>No. Ddojcord is an independent concept and is not affiliated with, endorsed by or sponsored by Discord Inc.</p>
+        </article>
+        <article class="faq-item">
+          <h3>When will it be available?</h3>
+          <p>There is no release date to announce. The roadmap will change as the concept develops.</p>
+        </article>
       </div>
     </section>
 
-    <section class="final-cta wrap reveal">
-      <h2>A more personal space is taking shape.</h2>
-      <p>Explore the direction, try the visual study, and check back as the Ddojcord concept develops.</p>
+    <section class="closing wrap reveal">
+      <span class="section-kicker">END OF TRANSMISSION</span>
+      <h2>Stay a little<br><em>longer.</em></h2>
+      <p>A quieter space is taking shape.</p>
       <a class="button-primary" href="#top">Back to the beginning <span aria-hidden="true">↑</span></a>
     </section>
   </main>
 
   <footer class="site-footer wrap">
-    <div class="footer-top">
-      <a class="brand" href="#top">
-        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M8 5.5h10.2c5.2 0 8.3 3.4 8.3 8.4v4.2c0 5-3.1 8.4-8.3 8.4H8V5.5Z" stroke="#A9F0FF" stroke-width="2.1"/><path d="M12 10.1h5.8c3 0 4.7 1.8 4.7 4.7v2.4c0 2.9-1.7 4.7-4.7 4.7H12V10.1Z" fill="#B8A5FF"/></svg></span>
-        <span class="brand-word">ddoj<span>cord</span></span>
-      </a>
-      <div class="footer-links"><a href="#experience">Experience</a><a href="#roadmap">Roadmap</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div>
-    </div>
+    <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">d.</span><span>ddojcord</span></a>
+    <div class="footer-links"><a href="#experience">Atmosphere</a><a href="#roadmap">Roadmap</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div>
     <div class="footer-bottom">
-      <p>© <span data-year>2026</span> Ddojcord. An independent project concept. Not affiliated with, endorsed by, or sponsored by Discord Inc. Discord is a trademark of Discord Inc.</p>
-      <p>Designed as a concept. <a href="#faq">Know what you're viewing.</a></p>
+      <p>© <span data-year>2026</span> Ddojcord. An independent project concept. Not affiliated with, endorsed by or sponsored by Discord Inc. Discord is a trademark of Discord Inc.</p>
+      <span>MADE IN THE DARK / WITH INTENT</span>
     </div>
   </footer>
 
