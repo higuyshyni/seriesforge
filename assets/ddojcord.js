@@ -1,5 +1,6 @@
 (() => {
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (window.matchMedia("(hover: none)").matches) document.body.classList.add("touch-device");
 
   const menuButton = document.querySelector(".menu-toggle");
   const nav = document.querySelector(".nav-links");
@@ -49,9 +50,15 @@
     });
 
     document.addEventListener("pointermove", (event) => {
+      document.documentElement.style.setProperty("--flash-x", event.clientX + "px");
+      document.documentElement.style.setProperty("--flash-y", event.clientY + "px");
       if (event.pointerType === "touch") return;
       document.documentElement.style.setProperty("--pointer-x", event.clientX + "px");
       document.documentElement.style.setProperty("--pointer-y", event.clientY + "px");
+    }, { passive: true });
+    document.addEventListener("pointerdown", (event) => {
+      document.documentElement.style.setProperty("--flash-x", event.clientX + "px");
+      document.documentElement.style.setProperty("--flash-y", event.clientY + "px");
     }, { passive: true });
   }
 
