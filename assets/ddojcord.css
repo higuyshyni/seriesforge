@@ -625,3 +625,33 @@ body.touch-device::after {
 @media (prefers-reduced-motion: reduce) {
   body::after { transition: none; }
 }
+
+
+/* Tight flashlight beam: the page disappears outside the light. */
+body::before {
+  background: radial-gradient(circle at var(--flash-x) var(--flash-y),
+    rgba(255,255,255,.13) 0,
+    rgba(255,255,255,.055) 55px,
+    transparent 145px);
+  opacity: .72;
+}
+body::after {
+  z-index: 45;
+  background: radial-gradient(circle 210px at var(--flash-x) var(--flash-y),
+    transparent 0,
+    transparent 66px,
+    rgba(0,0,0,.28) 94px,
+    rgba(0,0,0,.82) 142px,
+    #000 184px,
+    #000 210px);
+  transition: none;
+}
+body.touch-device::after {
+  background: radial-gradient(circle 230px at var(--flash-x) var(--flash-y),
+    transparent 0,
+    transparent 78px,
+    rgba(0,0,0,.28) 108px,
+    rgba(0,0,0,.82) 158px,
+    #000 200px,
+    #000 230px);
+}
