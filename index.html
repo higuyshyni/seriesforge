@@ -1,820 +1,293 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2">
-  <link rel="apple-touch-icon" href="/favicon.svg?v=2">
-
-  <title>SeriesForge — Turn Long Videos Into Short-Form Series</title>
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    :root {
-      --bg: #08080c;
-      --card: #111118;
-      --text: #f5f5f7;
-      --muted: #9b9ba8;
-      --purple: #8b5cf6;
-      --purple-light: #a78bfa;
-      --border: rgba(255,255,255,0.09);
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    /* NAVBAR */
-
-    nav {
-      width: 100%;
-      max-width: 1150px;
-      margin: auto;
-      padding: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .logo {
-      font-size: 21px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-    }
-
-    .logo span {
-      color: var(--purple-light);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 30px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .nav-links a {
-      transition: color 0.2s ease;
-    }
-
-    .nav-links a:hover {
-      color: white;
-    }
-
-    .nav-button {
-      background: white;
-      color: #08080c;
-      padding: 10px 18px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 700;
-      transition: transform 0.2s ease;
-    }
-
-    .nav-button:hover {
-      transform: translateY(-1px);
-    }
-
-    /* HERO */
-
-    .hero {
-      max-width: 1050px;
-      margin: auto;
-      padding: 110px 24px 80px;
-      text-align: center;
-      position: relative;
-    }
-
-    .glow {
-      position: absolute;
-      width: 500px;
-      height: 300px;
-      background: #7c3aed;
-      filter: blur(150px);
-      opacity: 0.16;
-      top: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      pointer-events: none;
-    }
-
-    .badge {
-      display: inline-block;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.03);
-      color: var(--purple-light);
-      padding: 7px 13px;
-      border-radius: 100px;
-      font-size: 13px;
-      margin-bottom: 25px;
-    }
-
-    h1 {
-      font-size: clamp(48px, 8vw, 82px);
-      line-height: 0.98;
-      letter-spacing: -4px;
-      max-width: 900px;
-      margin: auto;
-    }
-
-    h1 span {
-      background: linear-gradient(135deg, #fff, #9b7cff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero p {
-      max-width: 650px;
-      margin: 28px auto 35px;
-      color: var(--muted);
-      font-size: 18px;
-    }
-
-    .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .primary {
-      display: inline-block;
-      background: var(--purple);
-      padding: 13px 22px;
-      border-radius: 9px;
-      font-weight: 700;
-      box-shadow: 0 0 30px rgba(139,92,246,0.25);
-      transition: all 0.2s ease;
-    }
-
-    .primary:hover {
-      background: #7c3aed;
-      transform: translateY(-1px);
-    }
-
-    .secondary {
-      display: inline-block;
-      border: 1px solid var(--border);
-      padding: 13px 22px;
-      border-radius: 9px;
-      color: #ddd;
-      transition: all 0.2s ease;
-    }
-
-    .secondary:hover {
-      background: rgba(255,255,255,0.04);
-      border-color: rgba(255,255,255,0.16);
-    }
-
-    /* PRODUCT PREVIEW */
-
-    .preview {
-      max-width: 950px;
-      margin: 30px auto 100px;
-      padding: 0 24px;
-    }
-
-    .dashboard {
-      background: #101016;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 30px 100px rgba(0,0,0,0.5);
-    }
-
-    .dashboard-top {
-      padding: 13px 18px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      gap: 7px;
-    }
-
-    .dot {
-      width: 9px;
-      height: 9px;
-      background: #383842;
-      border-radius: 50%;
-    }
-
-    .dashboard-content {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 15px;
-      padding: 20px;
-    }
-
-    .video {
-      height: 320px;
-      border-radius: 10px;
-      background:
-        linear-gradient(
-          135deg,
-          rgba(139,92,246,.25),
-          rgba(20,20,30,.5)
-        ),
-        #181820;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #aaa;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .video::before {
-      content: "";
-      position: absolute;
-      width: 180px;
-      height: 180px;
-      background: rgba(139,92,246,.18);
-      filter: blur(50px);
-      border-radius: 50%;
-    }
-
-    .play {
-      width: 55px;
-      height: 55px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.1);
-      border: 1px solid rgba(255,255,255,.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      z-index: 1;
-    }
-
-    .clips {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .clip {
-      flex: 1;
-      border-radius: 9px;
-      background: #181820;
-      border: 1px solid var(--border);
-      padding: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .clip-info strong {
-      display: block;
-      font-size: 14px;
-    }
-
-    .clip-info small {
-      color: var(--muted);
-    }
-
-    .status {
-      color: #7dd3fc;
-      font-size: 11px;
-    }
-
-    /* SECTIONS */
-
-    .section {
-      max-width: 1050px;
-      margin: auto;
-      padding: 70px 24px;
-    }
-
-    .section-header {
-      max-width: 650px;
-      margin-bottom: 45px;
-    }
-
-    .eyebrow {
-      color: var(--purple-light);
-      font-size: 13px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 12px;
-    }
-
-    h2 {
-      font-size: 42px;
-      letter-spacing: -2px;
-      line-height: 1.1;
-    }
-
-    .section-header p {
-      color: var(--muted);
-      margin-top: 15px;
-    }
-
-    .features {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-    }
-
-    .feature {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 13px;
-      padding: 25px;
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-
-    .feature:hover {
-      transform: translateY(-3px);
-      border-color: rgba(139,92,246,.3);
-    }
-
-    .icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 9px;
-      background: rgba(139,92,246,.12);
-      color: var(--purple-light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-      font-size: 18px;
-    }
-
-    .feature h3 {
-      font-size: 17px;
-      margin-bottom: 8px;
-    }
-
-    .feature p {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    /* PRICING */
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-    }
-
-    .price-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 13px;
-      padding: 30px;
-    }
-
-    .price-card.featured {
-      border-color: rgba(139,92,246,.6);
-      box-shadow: 0 0 40px rgba(139,92,246,.1);
-    }
-
-    .price-card h3 {
-      font-size: 20px;
-      margin-bottom: 10px;
-    }
-
-    .price {
-      font-size: 40px;
-      font-weight: 800;
-      letter-spacing: -2px;
-      margin-bottom: 8px;
-    }
-
-    .price span {
-      font-size: 14px;
-      font-weight: 400;
-      color: var(--muted);
-      letter-spacing: 0;
-    }
-
-    .price-card p {
-      color: var(--muted);
-      font-size: 14px;
-      margin-bottom: 22px;
-    }
-
-    .price-card ul {
-      list-style: none;
-      margin-bottom: 25px;
-    }
-
-    .price-card li {
-      color: #ccc;
-      font-size: 14px;
-      margin: 10px 0;
-    }
-
-    .price-card li::before {
-      content: "✓";
-      color: var(--purple-light);
-      margin-right: 8px;
-    }
-
-    /* CTA */
-
-    .cta {
-      max-width: 900px;
-      margin: 80px auto;
-      padding: 80px 25px;
-      text-align: center;
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      background:
-        radial-gradient(
-          circle at 50% 0%,
-          rgba(139,92,246,.18),
-          transparent 55%
-        ),
-        #0d0d13;
-    }
-
-    .cta h2 {
-      max-width: 650px;
-      margin: auto;
-    }
-
-    .cta p {
-      color: var(--muted);
-      margin: 18px auto 30px;
-    }
-
-    /* FOOTER */
-
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 30px 24px;
-      color: var(--muted);
-      font-size: 13px;
-      text-align: center;
-    }
-
-    .footer-links {
-      display: inline-flex;
-      gap: 18px;
-      margin-left: 14px;
-    }
-
-    .footer-links a {
-      color: var(--muted);
-      transition: color 0.2s ease;
-    }
-
-    .footer-links a:hover {
-      color: white;
-    }
-
-    /* MOBILE */
-
-    @media (max-width: 700px) {
-      nav {
-        padding: 20px;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      .hero {
-        padding-top: 75px;
-      }
-
-      h1 {
-        letter-spacing: -2px;
-      }
-
-      .dashboard-content {
-        grid-template-columns: 1fr;
-      }
-
-      .video {
-        height: 220px;
-      }
-
-      .features,
-      .pricing-grid {
-        grid-template-columns: 1fr;
-      }
-
-      h2 {
-        font-size: 34px;
-      }
-
-      .cta {
-        margin: 50px 20px;
-      }
-    }
-  .site-logo-icon{width:28px;height:28px;display:inline-block;vertical-align:middle;margin-right:8px;border-radius:7px}.logo{display:inline-flex;align-items:center}\n  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b14">
+  <meta name="description" content="Ddojcord is an independent desktop client concept exploring a more personal, modular and immersive chat experience.">
+  <meta property="og:title" content="Ddojcord — Your space, refracted.">
+  <meta property="og:description" content="A chat space that feels like yours. Explore the Ddojcord concept.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://seriesforge.online/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/assets/ddojcord.css">
+  <title>Ddojcord — Your space, refracted.</title>
 </head>
-
 <body>
+  <div class="ambient ambient-a"></div>
+  <div class="ambient ambient-b"></div>
+  <div class="site-noise"></div>
 
-  <!-- NAVBAR -->
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Ddojcord home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none">
+          <path d="M8 5.5h10.2c5.2 0 8.3 3.4 8.3 8.4v4.2c0 5-3.1 8.4-8.3 8.4H8V5.5Z" stroke="url(#markStroke)" stroke-width="2.1"/>
+          <path d="M12 10.1h5.8c3 0 4.7 1.8 4.7 4.7v2.4c0 2.9-1.7 4.7-4.7 4.7H12V10.1Z" fill="url(#markFill)" fill-opacity=".85"/>
+          <defs>
+            <linearGradient id="markStroke" x1="7" y1="5" x2="27" y2="27"><stop stop-color="#A9F0FF"/><stop offset="1" stop-color="#B8A5FF"/></linearGradient>
+            <linearGradient id="markFill" x1="12" y1="10" x2="23" y2="22"><stop stop-color="#A9F0FF"/><stop offset="1" stop-color="#B8A5FF"/></linearGradient>
+          </defs>
+        </svg>
+      </span>
+      <span class="brand-word">ddoj<span>cord</span></span>
+    </a>
 
-  <nav>
-    <a href="#" class="logo"><img class="site-logo-icon" src="favicon.svg?v=2" alt="" aria-hidden="true">Series<span>Forge</span></a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#experience">Experience</a>
+      <a href="#features">Capabilities</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#faq">FAQ</a>
+    </nav>
 
-    <div class="nav-links">
-      <a href="#features">Features</a>
-      <a href="#how">How it works</a>
-      <a href="app/">Open app</a>
+    <a class="nav-cta" href="#roadmap">In development <span>↗</span></a>
+    <button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> An independent desktop client concept</div>
+        <h1>A chat space<br><span class="gradient-text">that feels like yours.</span></h1>
+        <p>Ddojcord explores a more personal way to connect: a modular desktop experience shaped around expressive themes, thoughtful controls, and room for your own workflow.</p>
+        <div class="hero-actions">
+          <a class="button-primary" href="#experience">Explore the experience
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h11M10 5l5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="button-quiet" href="#roadmap">See what's taking shape</a>
+        </div>
+        <div class="hero-meta">
+          <span><i></i> DESIGNED FOR PERSONALIZATION</span>
+          <span><i></i> EARLY CONCEPT</span>
+        </div>
+      </div>
+
+      <div class="hero-stage" data-tilt aria-label="Abstract glass interface preview">
+        <div class="stage-glow"></div>
+        <div class="orbit"><span class="orbit-point"></span></div>
+        <div class="hero-object">
+          <div class="hero-glass">
+            <div class="preview-top"><span>DDOJC / SPATIAL PREVIEW</span><span class="preview-status">CONCEPT STUDY</span></div>
+            <div class="preview-content">
+              <div class="preview-rail">
+                <span class="rail-glyph active">◈</span>
+                <span class="rail-glyph">⌘</span>
+                <span class="rail-glyph">◇</span>
+                <span class="rail-glyph">⌁</span>
+                <span class="rail-glyph">＋</span>
+              </div>
+              <div class="preview-main">
+                <div class="preview-heading">
+                  <div><small>YOUR WORKSPACE</small><h3>Quiet hours</h3></div>
+                  <span class="preview-pill">FOCUS MODE</span>
+                </div>
+                <div class="preview-note">
+                  <span class="preview-avatar">N</span>
+                  <div><strong>Nova Studio</strong><p>A little more space. A little less noise.</p></div>
+                </div>
+                <div class="preview-line"><span></span> Your environment is tuned and ready.</div>
+                <div class="preview-bars"><i></i><i></i><i></i></div>
+                <div class="preview-bottom"><span>ATMOSPHERE / 04</span><span>SYNCED LOCALLY</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="float-card float-one"><span class="float-icon">✧</span><span>Glass surfaces<small>DEPTH, NOT DISTRACTION</small></span></div>
+        <div class="float-card float-two"><span class="float-icon">⌘</span><span>Personal controls<small>YOUR FLOW, YOUR RULES</small></span></div>
+        <div class="float-card float-three"><span class="float-icon">◌</span><span>Modular by design</span></div>
+      </div>
+      <div class="scroll-mark">Scroll to explore</div>
+    </section>
+
+    <div class="signal-strip" aria-hidden="true">
+      <div class="signal-track">
+        <span><b></b> PERSONAL BY DESIGN</span><span><b></b> MODULAR THINKING</span><span><b></b> DEPTH WITH PURPOSE</span><span><b></b> YOUR SPACE, REIMAGINED</span>
+      </div>
     </div>
 
-    <a href="app/" class="nav-button">
-      Open creator app
-    </a>
-  </nav>
-
-
-  <main>
-
-    <!-- HERO -->
-
-    <section class="hero">
-
-      <div class="glow"></div>
-
-      <div class="badge">
-        ✦ Your long-form content, reimagined
+    <section class="section wrap" id="experience">
+      <div class="section-head reveal">
+        <span class="section-kicker">01 — The experience</span>
+        <h2>Depth you can feel.<br><em>Clarity you can keep.</em></h2>
+        <p>A visual direction for a desktop space that feels tactile without getting in the way. Try the atmosphere controls below to change the preview.</p>
       </div>
 
-      <h1>
-        Turn one long video into
-        <span>a whole series.</span>
-      </h1>
-
-      <p>
-        SeriesForge automatically finds the strongest sections
-        of your long-form videos and transforms them into polished,
-        ready-to-publish short-form content.
-      </p>
-
-      <div class="buttons">
-        <a href="app/" class="primary">
-          Open creator app →
-        </a>
-
-        <a href="#how" class="secondary">
-          See how it works
-        </a>
-      </div>
-
-    </section>
-
-
-    <!-- PRODUCT PREVIEW -->
-
-    <section class="preview">
-
-      <div class="dashboard">
-
-        <div class="dashboard-top">
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-        </div>
-
-        <div class="dashboard-content">
-
-          <div class="video">
-            <div class="play">▶</div>
+      <div class="experience-layout">
+        <div class="demo-window reveal" id="demo-window" data-skin="ice" data-blur="on" data-depth="on" data-compact="off">
+          <div class="demo-topbar"><span>DDOJC / INTERFACE STUDY</span><span class="demo-dots"><i></i><i></i><i></i></span></div>
+          <div class="demo-app">
+            <div class="demo-spaces">
+              <span class="demo-space selected">✧</span><span class="demo-space">◈</span><span class="demo-space">⌘</span><span class="demo-space">＋</span>
+            </div>
+            <div class="demo-room-list">
+              <small>COLLECTION</small>
+              <div class="demo-room active"><span>◌</span> lounge</div>
+              <div class="demo-room"><span>⌁</span> ideas</div>
+              <div class="demo-room"><span>◇</span> projects</div>
+              <div class="demo-room"><span>↗</span> links</div>
+              <small style="margin-top:22px">DIRECT</small>
+              <div class="demo-room"><span>·</span> aria</div>
+              <div class="demo-room"><span>·</span> milo</div>
+            </div>
+            <div class="demo-feed">
+              <div class="demo-feed-head"><strong># lounge</strong><span>04 MEMBERS</span></div>
+              <div class="demo-message">
+                <span class="demo-face">A</span>
+                <div><strong>aria</strong><time>10:42</time><p>the new atmosphere is looking clean. that soft glass is everything.</p></div>
+              </div>
+              <div class="demo-message">
+                <span class="demo-face alt">M</span>
+                <div><strong>milo</strong><time>10:44</time><p>Keeping the useful parts close and the noise out. That's the idea.</p></div>
+              </div>
+              <div class="demo-message">
+                <span class="demo-face">A</span>
+                <div><strong>aria</strong><time>10:45</time><p>Exactly. Let the workspace adapt to the person using it.</p></div>
+              </div>
+              <div class="demo-composer">Write something thoughtful…</div>
+            </div>
           </div>
+          <span class="demo-caption">VISUAL STUDY · NOT A CONNECTED CLIENT</span>
+        </div>
 
-          <div class="clips">
-
-            <div class="clip">
-              <div class="clip-info">
-                <strong>Episode 01</strong>
-                <small>42 sec · Vertical</small>
-              </div>
-              <div class="status">Ready</div>
-            </div>
-
-            <div class="clip">
-              <div class="clip-info">
-                <strong>Episode 02</strong>
-                <small>38 sec · Vertical</small>
-              </div>
-              <div class="status">Ready</div>
-            </div>
-
-            <div class="clip">
-              <div class="clip-info">
-                <strong>Episode 03</strong>
-                <small>51 sec · Vertical</small>
-              </div>
-              <div class="status">Ready</div>
-            </div>
-
-            <div class="clip">
-              <div class="clip-info">
-                <strong>Episode 04</strong>
-                <small>44 sec · Vertical</small>
-              </div>
-              <div class="status">Ready</div>
-            </div>
-
+        <aside class="demo-controls reveal delay-1">
+          <span class="mini-label">LIVE APPEARANCE STUDY</span>
+          <h3>Shape the atmosphere.</h3>
+          <p>Switch the palette and surface treatments. This is an interactive design preview, not a working chat client.</p>
+          <div class="swatch-row" aria-label="Choose a preview palette">
+            <button class="swatch-ice" type="button" data-skin-choice="ice" aria-label="Ice palette" aria-pressed="true"></button>
+            <button class="swatch-violet" type="button" data-skin-choice="violet" aria-label="Violet palette" aria-pressed="false"></button>
+            <button class="swatch-mint" type="button" data-skin-choice="mint" aria-label="Mint palette" aria-pressed="false"></button>
           </div>
-
-        </div>
+          <div class="setting-list">
+            <div class="setting-row"><span>Glass blur<small>Soft layered surfaces</small></span><button class="toggle" type="button" data-toggle="blur" aria-label="Toggle glass blur" aria-pressed="true"></button></div>
+            <div class="setting-row"><span>Depth effects<small>Light and elevation</small></span><button class="toggle" type="button" data-toggle="depth" aria-label="Toggle depth effects" aria-pressed="true"></button></div>
+            <div class="setting-row"><span>Compact spacing<small>More room in view</small></span><button class="toggle" type="button" data-toggle="compact" aria-label="Toggle compact spacing" aria-pressed="false"></button></div>
+          </div>
+        </aside>
       </div>
-
     </section>
 
-
-    <!-- FEATURES -->
-
-    <section class="section" id="features">
-
-      <div class="section-header">
-
-        <div class="eyebrow">
-          Everything automated
-        </div>
-
-        <h2>
-          From recording to
-          ready-to-post.
-        </h2>
-
-        <p>
-          SeriesForge handles the repetitive work so you can focus
-          on creating great content.
-        </p>
-
+    <section class="section wrap" id="features">
+      <div class="section-head reveal">
+        <span class="section-kicker">02 — Design principles</span>
+        <h2>More than a new coat<br><em>of paint.</em></h2>
+        <p>The Ddojcord direction is built around meaningful customization: tools that fit your habits, an interface with atmosphere, and controls that stay understandable.</p>
       </div>
 
-
-      <div class="features">
-
-        <div class="feature">
-          <div class="icon">✦</div>
-          <h3>Find the story</h3>
-          <p>
-            Automatically identify complete, compelling sections
-            from your long-form videos.
-          </p>
-        </div>
-
-        <div class="feature">
-          <div class="icon">▣</div>
-          <h3>Go vertical</h3>
-          <p>
-            Reframe your footage for TikTok, Reels, Shorts,
-            and other vertical platforms.
-          </p>
-        </div>
-
-        <div class="feature">
-          <div class="icon">Aa</div>
-          <h3>Perfect captions</h3>
-          <p>
-            Generate synchronized captions that make every
-            clip easy to follow.
-          </p>
-        </div>
-
-        <div class="feature">
-          <div class="icon">⌁</div>
-          <h3>Post metadata</h3>
-          <p>
-            Generate hooks, titles, descriptions, and other
-            metadata for every clip.
-          </p>
-        </div>
-
-        <div class="feature">
-          <div class="icon">✓</div>
-          <h3>Review everything</h3>
-          <p>
-            Review and approve clips before anything gets
-            published to your audience.
-          </p>
-        </div>
-
-        <div class="feature">
-          <div class="icon">↗</div>
-          <h3>Publish automatically</h3>
-          <p>
-            Connect your social accounts and schedule approved
-            content for publication.
-          </p>
-        </div>
-
+      <div class="feature-grid">
+        <article class="feature-card reveal">
+          <span class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7.5 12 3l8 4.5v9L12 21l-8-4.5v-9Z" stroke="currentColor" stroke-width="1.5"/><path d="m4.5 7.8 7.5 4.4 7.5-4.4M12 12.2V21" stroke="currentColor" stroke-width="1.5"/></svg></span>
+          <h3>A surface with depth.</h3>
+          <p>Translucency, soft reflections, layered lighting, and dimensional details — used with restraint so the interface stays readable.</p>
+          <div class="feature-art"><i class="glass-stack"></i><i class="glass-stack"></i><i class="glass-stack"></i></div>
+        </article>
+        <article class="feature-card reveal delay-1">
+          <span class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3v5m0 8v5M3 12h5m8 0h5M5.6 5.6l3.5 3.5m5.8 5.8 3.5 3.5m0-12.8-3.5 3.5m-5.8 5.8-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="12" r="3.2" stroke="currentColor" stroke-width="1.5"/></svg></span>
+          <h3>Your tools, your way.</h3>
+          <p>A modular approach to extensions and small utilities, with a focus on clear controls and purposeful additions.</p>
+          <div class="node-art"><i></i><i></i><i></i></div>
+        </article>
+        <article class="feature-card reveal">
+          <span class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5.5h16v13H4z" stroke="currentColor" stroke-width="1.5"/><path d="M8 9h8M8 12h5M8 15h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+          <h3>Clarity over clutter.</h3>
+          <p>Thoughtful spacing, useful hierarchy, and adjustable density make room for what matters in the moment.</p>
+          <div class="orbit-art"><i></i></div>
+        </article>
+        <article class="feature-card reveal delay-1">
+          <span class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5 9.2 17 19 7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 3.5a8.5 8.5 0 1 0 8.5 8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+          <h3>Control that stays close.</h3>
+          <p>Keyboard-first ideas, focused modes, and settings that are easy to understand — designed to keep the experience in your hands.</p>
+          <div class="feature-art"><i class="glass-stack"></i><i class="glass-stack"></i><i class="glass-stack"></i></div>
+        </article>
       </div>
-
     </section>
 
-
-    <!-- HOW IT WORKS -->
-
-    <section class="section" id="how">
-
-      <div class="section-header">
-
-        <div class="eyebrow">
-          How it works
-        </div>
-
-        <h2>
-          One video in.
-          A content series out.
-        </h2>
-
+    <section class="manifesto">
+      <div class="manifesto-inner wrap reveal">
+        <h2>Less interface telling you how to work.<br><span>More room to make it your own.</span></h2>
+        <p class="manifesto-note">A considered workspace should feel personal, not complicated. That's the standard we're exploring.</p>
       </div>
-
-
-      <div class="features">
-
-        <div class="feature">
-          <div class="icon">01</div>
-
-          <h3>Upload</h3>
-
-          <p>
-            Give SeriesForge your podcast, interview,
-            livestream, or other long-form video.
-          </p>
-        </div>
-
-        <div class="feature">
-          <div class="icon">02</div>
-
-          <h3>Forge</h3>
-
-          <p>
-            SeriesForge finds complete sections and turns
-            them into sequential short-form clips.
-          </p>
-        </div>
-
-        <div class="feature">
-          <div class="icon">03</div>
-
-          <h3>Publish</h3>
-
-          <p>
-            Review your clips, schedule them, and publish
-            them to your connected social accounts.
-          </p>
-        </div>
-
-      </div>
-
     </section>
 
-
-    <!-- CTA -->
-
-    <section class="cta">
-
-      <h2>
-        Your next content series is already
-        hiding inside your last video.
-      </h2>
-
-      <p>
-        Stop manually cutting clips. Open creator app content.
-      </p>
-
-      <a href="app/" class="primary">
-        Open creator app →
-      </a>
-
+    <section class="section wrap" id="roadmap">
+      <div class="section-head reveal">
+        <span class="section-kicker">03 — What's taking shape</span>
+        <h2>Built in layers.<br><em>Not all at once.</em></h2>
+        <p>Ddojcord is an early concept. These are the areas being explored; they are not promises of released or currently working features.</p>
+      </div>
+      <div class="roadmap-grid">
+        <article class="roadmap-card reveal">
+          <span class="roadmap-number">LAYER 01 / FOUNDATION</span>
+          <span class="roadmap-status">Designing</span>
+          <h3>The core experience</h3>
+          <p>Establishing the desktop foundation, navigation model, and a coherent visual language.</p>
+        </article>
+        <article class="roadmap-card reveal delay-1">
+          <span class="roadmap-number">LAYER 02 / PERSONALIZATION</span>
+          <span class="roadmap-status">Exploring</span>
+          <h3>Appearance and control</h3>
+          <p>Exploring themes, layout options, interaction details, and accessible motion controls.</p>
+        </article>
+        <article class="roadmap-card reveal delay-2">
+          <span class="roadmap-number">LAYER 03 / EXTENSIBILITY</span>
+          <span class="roadmap-status">Planned</span>
+          <h3>A modular ecosystem</h3>
+          <p>Considering a focused extension model for adding useful capabilities without unnecessary clutter.</p>
+        </article>
+      </div>
     </section>
 
+    <section class="section wrap" id="faq">
+      <div class="faq-grid">
+        <div class="faq-intro reveal">
+          <span class="section-kicker">04 — A few details</span>
+          <h2>Before you<br><em>dive in.</em></h2>
+          <p>A quick note on what this page represents and what it doesn't.</p>
+        </div>
+        <div class="faq-list reveal delay-1">
+          <article class="faq-item">
+            <h3>Can I download Ddojcord today?</h3>
+            <p>No. This is an early product concept and design preview. There is no public installer or released client available from this website yet.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Is the interface preview connected to a chat account?</h3>
+            <p>No. The preview is a self-contained visual demo. It does not connect to Discord, access accounts, or send messages.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Is Ddojcord an official Discord product?</h3>
+            <p>No. Ddojcord is an independent concept and is not affiliated with, endorsed by, or sponsored by Discord Inc.</p>
+          </article>
+          <article class="faq-item">
+            <h3>When will it be available?</h3>
+            <p>There is no release date to announce yet. The roadmap will be updated as the project moves from concept into development.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta wrap reveal">
+      <h2>A more personal space is taking shape.</h2>
+      <p>Explore the direction, try the visual study, and check back as the Ddojcord concept develops.</p>
+      <a class="button-primary" href="#top">Back to the beginning <span aria-hidden="true">↑</span></a>
+    </section>
   </main>
 
+  <footer class="site-footer wrap">
+    <div class="footer-top">
+      <a class="brand" href="#top">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M8 5.5h10.2c5.2 0 8.3 3.4 8.3 8.4v4.2c0 5-3.1 8.4-8.3 8.4H8V5.5Z" stroke="#A9F0FF" stroke-width="2.1"/><path d="M12 10.1h5.8c3 0 4.7 1.8 4.7 4.7v2.4c0 2.9-1.7 4.7-4.7 4.7H12V10.1Z" fill="#B8A5FF"/></svg></span>
+        <span class="brand-word">ddoj<span>cord</span></span>
+      </a>
+      <div class="footer-links"><a href="#experience">Experience</a><a href="#roadmap">Roadmap</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span data-year>2026</span> Ddojcord. An independent project concept. Not affiliated with, endorsed by, or sponsored by Discord Inc. Discord is a trademark of Discord Inc.</p>
+      <p>Designed as a concept. <a href="#faq">Know what you're viewing.</a></p>
+    </div>
+  </footer>
 
-  <!-- FOOTER -->
-
-  footer>
-    © 2026 SeriesForge. Built for creators.
-    <span class="footer-links">
-      <a href="terms/">Terms</a>
-      <a href="privacy/">Privacy</a>
-      <a href="mailto:seriesforge.support@gmail.com">Support</a>
-    </span>
-  </footer
-
+  <script src="/assets/ddojcord.js" defer></script>
 </body>
 </html>
