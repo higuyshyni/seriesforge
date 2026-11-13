@@ -16,27 +16,21 @@
     });
   }
 
-  const demo = document.querySelector("#demo-window");
-  if (demo) {
-    document.querySelectorAll("[data-skin-choice]").forEach((button) => {
-      button.addEventListener("click", () => {
-        const skin = button.getAttribute("data-skin-choice");
-        demo.setAttribute("data-skin", skin);
-        document.querySelectorAll("[data-skin-choice]").forEach((item) => {
-          item.setAttribute("aria-pressed", String(item === button));
-        });
-      });
+  const lightButtons = Array.from(document.querySelectorAll("[data-light-switch]"));
+  const setLights = (on) => {
+    document.body.classList.toggle("lights-on", on);
+    document.body.classList.toggle("lights-off", !on);
+    lightButtons.forEach((button) => {
+      button.setAttribute("aria-pressed", String(on));
+      const label = button.querySelector("[data-light-label]");
+      if (label) label.textContent = on ? "LIGHTS ON" : "LIGHTS OFF";
     });
-
-    document.querySelectorAll("[data-toggle]").forEach((button) => {
-      button.addEventListener("click", () => {
-        const key = button.getAttribute("data-toggle");
-        const active = button.getAttribute("aria-pressed") !== "true";
-        button.setAttribute("aria-pressed", String(active));
-        demo.setAttribute("data-" + key, active ? "on" : "off");
-      });
+  };
+  lightButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      setLights(!document.body.classList.contains("lights-on"));
     });
-  }
+  });
 
   if (!reduceMotion) {
     document.querySelectorAll("[data-tilt]").forEach((element) => {
@@ -45,8 +39,8 @@
         const rect = element.getBoundingClientRect();
         const x = (event.clientX - rect.left) / rect.width;
         const y = (event.clientY - rect.top) / rect.height;
-        element.style.setProperty("--tilt-x", ((0.5 - y) * 5.5).toFixed(2) + "deg");
-        element.style.setProperty("--tilt-y", ((x - 0.5) * 7).toFixed(2) + "deg");
+        element.style.setProperty("--tilt-x", ((0.5 - y) * 3.2).toFixed(2) + "deg");
+        element.style.setProperty("--tilt-y", ((x - 0.5) * 4.5).toFixed(2) + "deg");
       });
       element.addEventListener("pointerleave", () => {
         element.style.setProperty("--tilt-x", "0deg");
@@ -54,22 +48,26 @@
       });
     });
 
-    const revealItems = document.querySelectorAll(".reveal");
-    if ("IntersectionObserver" in window) {
-      const observer = new IntersectionObserver((entries, currentObserver) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            currentObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.12 });
-      revealItems.forEach((item) => observer.observe(item));
-    } else {
-      revealItems.forEach((item) => item.classList.add("is-visible"));
-    }
+    document.addEventListener("pointermove", (event) => {
+      if (event.pointerType === "touch") return;
+      document.documentElement.style.setProperty("--pointer-x", event.clientX + "px");
+      document.documentElement.style.setProperty("--pointer-y", event.clientY + "px");
+    }, { passive: true });
+  }
+
+  const revealItems = document.querySelectorAll(".reveal");
+  if (!reduceMotion && "IntersectionObserver" in window) {
+    const observer = new IntersectionObserver((entries, currentObserver) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          currentObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealItems.forEach((item) => observer.observe(item));
   } else {
-    document.querySelectorAll(".reveal").forEach((item) => item.classList.add("is-visible"));
+    revealItems.forEach((item) => item.classList.add("is-visible"));
   }
 
   const year = document.querySelector("[data-year]");
