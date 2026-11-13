@@ -655,3 +655,37 @@ body.touch-device::after {
     #000 200px,
     #000 230px);
 }
+
+
+/* Modernline type and a slightly wider flashlight beam. */
+@font-face {
+  font-family: "Modernline";
+  src: url("https://st.1001fonts.net/download/font/modernline-personal-use.regular.otf") format("opentype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+body,
+.hero h1, .section-intro h2, .interlude p, .closing h2,
+.panel-content h3, .principle h3, .roadmap-row h3, .faq-item h3,
+.interface-heading h2, .brand, .button-primary, .button-quiet {
+  font-family: "Modernline", "Caveat", cursive;
+}
+body::after {
+  background: radial-gradient(circle 260px at var(--flash-x) var(--flash-y),
+    transparent 0,
+    transparent 82px,
+    rgba(0,0,0,.28) 116px,
+    rgba(0,0,0,.82) 176px,
+    #000 226px,
+    #000 260px);
+}
+body.touch-device::after {
+  background: radial-gradient(circle 280px at var(--flash-x) var(--flash-y),
+    transparent 0,
+    transparent 94px,
+    rgba(0,0,0,.28) 130px,
+    rgba(0,0,0,.82) 192px,
+    #000 244px,
+    #000 280px);
+}
