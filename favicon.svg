@@ -1,16 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Ddojcord">
-  <defs>
-    <linearGradient id="a" x1="8" y1="7" x2="56" y2="58" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#A9F0FF"/>
-      <stop offset=".52" stop-color="#91B8FF"/>
-      <stop offset="1" stop-color="#B8A5FF"/>
-    </linearGradient>
-    <linearGradient id="b" x1="14" y1="12" x2="48" y2="53" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#E7FBFF" stop-opacity=".95"/>
-      <stop offset="1" stop-color="#B6A7FF" stop-opacity=".7"/>
-    </linearGradient>
-  </defs>
-  <rect x="2" y="2" width="60" height="60" rx="19" fill="#0B1220" stroke="#B8DFFF" stroke-opacity=".28"/>
-  <path d="M15 11h19c11 0 18 7 18 18v6c0 11-7 18-18 18H15V11Z" fill="url(#a)" fill-opacity=".13" stroke="url(#a)" stroke-width="2.6"/>
-  <path d="M23 19h10c7 0 11 4 11 11v4c0 7-4 11-11 11H23V19Z" fill="url(#b)"/>
+  <rect x="2" y="2" width="60" height="60" rx="13" fill="#030303" stroke="#777" stroke-width="1.4"/>
+  <path d="M15 12h18c12 0 19 7 19 19v2c0 12-7 19-19 19H15V12Z" fill="none" stroke="#f2f2f2" stroke-width="3"/>
+  <path d="M24 21h8c7 0 11 4 11 10v2c0 6-4 10-11 10h-8V21Z" fill="#f2f2f2"/>
 </svg>
