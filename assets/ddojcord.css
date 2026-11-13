@@ -524,3 +524,104 @@ body.lights-off .panel-light { animation: none; opacity: .04; }
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* Handwritten type and flashlight-in-the-dark treatment */
+:root {
+  --white: #b8b8b8;
+  --silver: #707070;
+  --muted: #454545;
+  --dim: #303030;
+  --line: rgba(255,255,255,.075);
+  --line-soft: rgba(255,255,255,.035);
+  --flash-x: 50vw;
+  --flash-y: 40vh;
+}
+body {
+  color: #a0a0a0;
+  font-family: "Caveat", "Segoe Print", "Bradley Hand", cursive;
+}
+body::before {
+  background: radial-gradient(ellipse at var(--flash-x) var(--flash-y), rgba(255,255,255,.035), transparent 32rem);
+  opacity: .24;
+}
+body::after {
+  position: fixed;
+  inset: 0;
+  z-index: 35;
+  content: "";
+  pointer-events: none;
+  background: radial-gradient(
+    circle 440px at var(--flash-x) var(--flash-y),
+    rgba(255,255,255,.025) 0,
+    rgba(255,255,255,.008) 115px,
+    rgba(0,0,0,.18) 185px,
+    rgba(0,0,0,.76) 320px,
+    rgba(0,0,0,.97) 440px
+  );
+  transition: background .09s linear;
+}
+body.lights-off::before { opacity: .06; }
+body.touch-device::after {
+  background: radial-gradient(
+    circle 540px at var(--flash-x) var(--flash-y),
+    rgba(255,255,255,.025) 0,
+    rgba(255,255,255,.008) 170px,
+    rgba(0,0,0,.16) 265px,
+    rgba(0,0,0,.72) 405px,
+    rgba(0,0,0,.96) 540px
+  );
+}
+.site-header { z-index: 30; }
+.hero h1, .section-intro h2, .interlude p, .closing h2,
+.panel-content h3, .principle h3, .roadmap-row h3, .faq-item h3,
+.interface-heading h2, .brand, .button-primary, .button-quiet {
+  font-family: "Caveat", "Segoe Print", "Bradley Hand", cursive;
+}
+.hero h1 { font-weight: 600; letter-spacing: -.045em; }
+.section-intro h2, .closing h2, .interlude p { font-weight: 600; letter-spacing: -.045em; }
+.hero-copy > p { color: #777; font-size: 17px; line-height: 1.55; }
+.eyebrow, .section-kicker, .mini-label { color: #626262; font-size: 12px; letter-spacing: .12em; }
+.nav-links a, .footer-links a { color: #686868; font-size: 14px; }
+.nav-links a:hover, .footer-links a:hover { color: #bdbdbd; }
+.hero-actions .button-primary, .hero-actions .button-quiet, .closing .button-primary { font-size: 15px; }
+.hero-meta { color: #424242; font-size: 10px; }
+.section-intro > p { color: #686868; font-size: 15px; line-height: 1.65; }
+.panel-content > p { color: #686868; font-size: 15px; line-height: 1.6; }
+.panel-note { color: #454545; font-size: 10px; }
+.principle h3, .roadmap-row h3 { font-size: 25px; }
+.principle p, .roadmap-row p, .faq-item p { color: #666; font-size: 14px; line-height: 1.55; }
+.principle-number, .roadmap-index { color: #4b4b4b; font-size: 12px; }
+.roadmap-status { color: #666; font-size: 11px; }
+.faq-item h3 { font-size: 19px; }
+.closing > p { color: #656565; font-size: 16px; }
+.footer-bottom { color: #4c4c4c; font-size: 11px; }
+.interface-top, .interface-bottom { color: #656565; font-size: 9px; }
+.interface-heading small { color: #606060; font-size: 9px; }
+.interface-heading h2 { font-size: 25px; }
+.quiet-tag { color: #888; font-size: 9px; }
+.channel-line { color: #999; font-size: 12px; }
+.preview-message strong { color: #a7a7a7; font-size: 11px; }
+.preview-message p { color: #747474; font-size: 11px; }
+.preview-message time, .channel-line i { color: #555; font-size: 9px; }
+.preview-composer { color: #666; font-size: 10px; }
+.light-switch { color: #898989; }
+.button-primary { border-color: #a0a0a0; color: #080808; background: #a0a0a0; }
+.button-primary:hover { color: #bdbdbd; border-color: #bdbdbd; }
+.button-quiet { color: #777; }
+.room-glow { opacity: .18; }
+.light-beam { opacity: .22; }
+.interface-shell {
+  border-color: rgba(255,255,255,.12);
+  background: linear-gradient(135deg, rgba(25,25,25,.52), rgba(5,5,5,.93) 48%, rgba(12,12,12,.64));
+  box-shadow: 22px 35px 90px rgba(0,0,0,.94), 0 0 70px rgba(255,255,255,.025), inset 0 1px rgba(255,255,255,.12);
+}
+.atmosphere-panel { border-color: rgba(255,255,255,.08); background: linear-gradient(115deg, #080808 0%, #030303 52%, #090909 100%); }
+.interlude { background: radial-gradient(ellipse at 50% 50%, rgba(255,255,255,.018), transparent 64%); }
+@media (max-width: 700px) {
+  .hero-copy > p { font-size: 16px; }
+  .section-intro > p, .panel-content > p { font-size: 14px; }
+  .principle p, .roadmap-row p, .faq-item p { font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body::after { transition: none; }
+}
