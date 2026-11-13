@@ -33,6 +33,15 @@
     });
   });
 
+  document.addEventListener("pointermove", (event) => {
+    document.documentElement.style.setProperty("--flash-x", event.clientX + "px");
+    document.documentElement.style.setProperty("--flash-y", event.clientY + "px");
+  }, { passive: true });
+  document.addEventListener("pointerdown", (event) => {
+    document.documentElement.style.setProperty("--flash-x", event.clientX + "px");
+    document.documentElement.style.setProperty("--flash-y", event.clientY + "px");
+  }, { passive: true });
+
   if (!reduceMotion) {
     document.querySelectorAll("[data-tilt]").forEach((element) => {
       element.addEventListener("pointermove", (event) => {
@@ -48,18 +57,6 @@
         element.style.setProperty("--tilt-y", "0deg");
       });
     });
-
-    document.addEventListener("pointermove", (event) => {
-      document.documentElement.style.setProperty("--flash-x", event.clientX + "px");
-      document.documentElement.style.setProperty("--flash-y", event.clientY + "px");
-      if (event.pointerType === "touch") return;
-      document.documentElement.style.setProperty("--pointer-x", event.clientX + "px");
-      document.documentElement.style.setProperty("--pointer-y", event.clientY + "px");
-    }, { passive: true });
-    document.addEventListener("pointerdown", (event) => {
-      document.documentElement.style.setProperty("--flash-x", event.clientX + "px");
-      document.documentElement.style.setProperty("--flash-y", event.clientY + "px");
-    }, { passive: true });
   }
 
   const revealItems = document.querySelectorAll(".reveal");
