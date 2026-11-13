@@ -795,3 +795,20 @@ body::after {
       #000 50vw);
   }
 }
+
+
+/* Single supplied artwork */
+.art-grid {
+  grid-template-columns: minmax(0, 760px);
+  justify-content: center;
+}
+.art {
+  aspect-ratio: auto;
+  width: 100%;
+}
+.art img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: grayscale(1) contrast(1.08);
+}
