@@ -689,3 +689,86 @@ body.touch-device::after {
     #000 244px,
     #000 280px);
 }
+
+
+/* Minimal Ddojcord gallery */
+html, body { min-height: 100%; background: #030303; }
+body { min-height: 100vh; overflow-x: hidden; }
+.gallery {
+  position: relative;
+  z-index: 2;
+  width: min(1320px, calc(100% - 64px));
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: clamp(36px, 7vh, 76px) 0 70px;
+}
+.gallery h1 {
+  margin: 0 0 clamp(30px, 6vh, 64px);
+  color: #d0d0d0;
+  text-align: center;
+  font-family: "Modernline", "Caveat", cursive;
+  font-size: clamp(58px, 10vw, 112px);
+  font-weight: 400;
+  line-height: .9;
+  letter-spacing: -.04em;
+}
+.art-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  gap: clamp(14px, 3vw, 38px);
+}
+.art {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  background: #090909;
+  border: 1px solid rgba(255,255,255,.08);
+  box-shadow: 0 30px 90px rgba(0,0,0,.8);
+  filter: grayscale(1) contrast(1.08);
+  transition: transform .6s ease, filter .6s ease;
+}
+.art:nth-child(2) { transform: translateY(42px); }
+.art:hover { transform: translateY(-8px) scale(1.025); filter: grayscale(1) contrast(1.18) brightness(1.12); }
+.art:nth-child(2):hover { transform: translateY(30px) scale(1.025); }
+.art svg { display: block; width: 100%; height: 100%; object-fit: cover; }
+body::before {
+  z-index: 90;
+  background: radial-gradient(circle at var(--flash-x) var(--flash-y),
+    rgba(255,255,255,.11) 0,
+    rgba(255,255,255,.035) 320px,
+    transparent 760px);
+  opacity: .8;
+}
+body::after {
+  z-index: 999;
+  background: radial-gradient(circle 900px at var(--flash-x) var(--flash-y),
+    transparent 0,
+    transparent 470px,
+    rgba(0,0,0,.08) 590px,
+    rgba(0,0,0,.42) 710px,
+    rgba(0,0,0,.82) 820px,
+    #000 900px);
+  transition: none;
+}
+@media (max-width: 760px) {
+  .gallery { width: min(540px, calc(100% - 36px)); padding-top: 44px; }
+  .gallery h1 { margin-bottom: 34px; }
+  .art-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .art:nth-child(2) { transform: none; }
+  .art:nth-child(3) { grid-column: 1 / -1; width: 66%; justify-self: center; }
+  body::after {
+    background: radial-gradient(circle 700px at var(--flash-x) var(--flash-y),
+      transparent 0,
+      transparent 370px,
+      rgba(0,0,0,.1) 470px,
+      rgba(0,0,0,.48) 570px,
+      rgba(0,0,0,.84) 650px,
+      #000 700px);
+  }
+}
+@media (max-width: 420px) {
+  .art-grid { grid-template-columns: 1fr; }
+  .art:nth-child(3) { grid-column: auto; width: 100%; }
+}
